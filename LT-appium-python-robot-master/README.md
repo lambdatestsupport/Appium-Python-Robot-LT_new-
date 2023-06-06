@@ -60,16 +60,17 @@ Replace LambdaTest `username` and `accesskey` in the `common.robot` file as ment
 Library  AppiumLibrary
 
 *** Variables ***
-// highlight-start
-${username}         username
-${accesskey}        accesskey
-// highlight-end
-${REMOTE_URL}       https://${username}:${accesskey}@mobile-hub.lambdatest.com/wd/hub
-${TIMEOUT}          3000
 
+// highlight-start
+
+&{options}  platformName=${platformName}  platformVersion=${version}  deviceName=${deviceName}  visual=${visual} network=${network}  isRealMobile=${isRealMobile}  app=lt://proverbial-android  name=RobotFramework Lambda Test  automationName=${automationName}   w3c=${w3c}  deviceOrientation=${deviceOrientation}
+&{CAPABILITIES}     LT:Options=&{options}
+${REMOTE_URL}       https://{username}:{accesskey}@mobile-hub.lambdatest.com/wd/hub
+${TIMEOUT}          3000
 *** Keywords ***
 Open test app
-    Open Application  ${REMOTE_URL}  platformName=${platform}  platformVersion=${version}  deviceName=${deviceName}  visual=${visual}  network=${network}  isRealMobile=${isRealMobile}   app=${app}   name=Robot Framework Sample Test    build=Appium Python Robot
+    [Timeout]   ${TIMEOUT}
+    Open Application   ${REMOTE_URL}   &{CAPABILITIES}
 
 Close test app
     Close Application
@@ -130,11 +131,13 @@ You need to update your capabilities in `Makefile` files. In this sample project
 
 ```bash title="Makefile"
 test_Android1:
-	robot --variable version:10 --variable platform:Android --variable deviceName:"Galaxy S20" --variable isRealMobile:true --variable visual:true --variable network:false --variable console:false --variable app:"lt://" Tests/Android.robot
+	robot --variable version:10 --variable platformName:android --variable deviceName:"Galaxy S20" --variable isRealMobile:true --variable visual:false --variable network:false --variable console:false --variable automationName:UiAutomator2    --variable w3c:true      --variable deviceOrientation:landscape  Tests/Android.robot
 
-test_iOS1:
-	robot --variable version:14 --variable platform:iOS --variable deviceName:"iPhone 11" --variable isRealMobile:true --variable visual:true --variable network:false --variable console:false --variable app:"lt://" Tests/IOS.robot
-```
+test_ios1:
+	robot --variable version:14 --variable platformName:ios --variable deviceName:"iPhone 12" --variable isRealMobile:true --variable visual:false --variable network:false --variable console:false --variable automationName:UiAutomator2    --variable w3c:true      --variable deviceOrientation:landscape  Tests/IOS.robot
+
+test_Web_ios:
+	robot --variable version:14 --variable platformName:ios --variable deviceName:"iPhone 12" --variable isRealMobile:true --variable visual:false --variable network:false --variable console:false --variable automationName:UiAutomator2    --variable w3c:true      --variable deviceOrientation:landscape   Tests/AndroidIosWeb.robot
 
 **Info Note:**
 
