@@ -42,10 +42,10 @@ Before you can start performing App automation testing with Appium, you would ne
 
 ### Clone The Sample Project
 
-Clone the LambdaTest’s :link: [LT-appium-python-robot](https://github.com/LambdaTest/LT-appium-python-robot) repository and navigate to the code directory as shown below:
+Clone the LambdaTest’s :link: [LT-appium-python-robot](https://github.com/LambdaTest/LT-appium-python-robot) ()repository and navigate to the code directory as shown below:
 
 ```bash
-git clone https://github.com/LambdaTest/LT-appium-python-robot
+git clone https://github.com/lambdatestsupport/Appium-Python-Robot-LT_new- 
 cd LT-appium-python-robot
 ```
 
